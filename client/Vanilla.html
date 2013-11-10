@@ -1,0 +1,109 @@
+<head>
+	<title>Vanilla</title>
+</head>
+<body>
+	
+  {{#if currentUser}}
+  	
+    {{> vanillalists}}
+    {{> vanillaitems}}
+  {{else}}
+  	<header class="holo-actionBar"><span>Vanilla Writer</span><button style="float:right;">About</button></header>
+    {{> homecontent}}
+  {{/if}}
+  <footer class="holo-actionBar"><button onclick="window.open('demo-dark.html', '_self');" style="width:100%;">Switch to dark theme</button></header>
+</body>
+
+<template name="homecontent">
+	<div class="loginWrapper">
+		{{> login}}
+		{{> signup}}	
+	</div>
+</template>
+
+
+<template name="login">
+	<div class="login">
+			<h3>Login</h3>
+		<div class="holo-field">
+			<input class="input" id="username" name="username" placeholder="username" type="text">
+			<div class='right'></div>
+		</div>
+		<div class="holo-field">
+	    	<input class="input" id="password" name="password" placeholder="password"  type="password">
+	    	<div class='right'></div>
+	    </div>
+	    <input class="half-size" id="btnLogIn" type="submit" value="Log In">
+	    <input class="half-size" id="btnToggleSignup" type="submit" value="Or Sign Up">	
+	</div>
+</template>
+
+<template name="signup">
+	<div class="signup">
+	    <h3>Sign up</h3>
+	    <div class="holo-field">
+			<input class="input" id="email" name="email" placeholder="email" type="text">
+			<div class='right'></div>
+		</div>
+		<div class="holo-field">
+			<input class="input" id="newusername" name="username" placeholder="username" type="text">
+			<div class='right'></div>
+		</div>
+		<div class="holo-field">
+			<input class="input" id="fullname" name="fullname" placeholder="fullname" type="text">
+			<div class='right'></div>
+		</div>
+		<div class="holo-field">
+			<input class="input" id="newpassword" name="password" placeholder="password" type="password">
+			<div class='right'></div>
+		</div>
+		<div class="holo-field">
+			<input class="input" id="password2" name="password2" placeholder="retype password" type="password">
+			<div class='right'></div>
+		</div>
+			
+		<input class="half-size" id= "btnCreateAccount" type="submit" value="Sign Up">
+		<input class="half-size" id="btnToggleSignup" type="submit" value="Or Log In">
+	</div>
+</template>
+
+<template name="vanillalists">
+	<header class="holo-actionBar"><span>Vanilla Writer</span><button style="float:right;" id="btnLogOut">Logout</button></header>
+	<p>Fullname: {{fullName}}</p>
+	<p>Username: {{userName}}</p>
+	<p>Number: {{noOfLists}}</p>
+	<p>Last: {{lastList}}</p>
+	{{#each lists}}
+	<div class="listWrapper">
+		<hr/>
+		<p>{{buddyFullName user_id}}</p>
+		<p>@{{buddyUserName user_id}}</p>
+		<p>{{elapsedTime list}}</p>
+		<p>{{list}}</p>
+		<input id="deleteList" type="submit" value="Delete List">
+	</div>
+	{{/each}}
+	<h1>Create a new list</h1>
+	<p>
+	  <textarea name="text" class="listText"></textarea>
+	  <input id="createTheList" type="submit" value="List!">
+	</p>
+</template>
+<template name="vanillaitems">
+	<p>Last: {{lastItem}}</p>
+	{{#each items}}
+	<div class="listWrapper">
+		<hr/>
+		<p>{{buddyFullName user_id}}</p>
+		<p>@{{buddyUserName user_id}}</p>
+		<p>{{elapsedTime item}}</p>
+		<p>{{item}}</p>
+		<input id="deleteItem" type="submit" value="Delete Item">
+	</div>
+	{{/each}}
+	<h1>Create a new item</h1>
+	<p>
+	  <textarea name="text" class="itemText"></textarea>
+	  <input id="createTheItem" type="submit" value="Item!">
+	</p>
+</template>
