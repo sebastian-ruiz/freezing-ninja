@@ -17,6 +17,37 @@ Deps.autorun(function () {
     todosHandle = null;
 });
 
+//jQuery shake function.
+(function ($) {
+    $.fn.shake = function (options) {
+        // defaults
+        var settings = {
+            'shakes': 2,
+            'distance': 10,
+            'duration': 400
+        };
+        // merge options
+        if (options) {
+            $.extend(settings, options);
+        }
+        // make it so
+        var pos;
+        return this.each(function () {
+            $this = $(this);
+            // position if necessary
+            pos = $this.css('position');
+            if (!pos || pos === 'static') {
+                $this.css('position', 'relative');
+            }
+            // shake it
+            for (var x = 1; x <= settings.shakes; x++) {
+                $this.animate({ left: settings.distance * -1 }, (settings.duration / settings.shakes) / 4)
+                    .animate({ left: settings.distance }, (settings.duration / settings.shakes) / 2)
+                    .animate({ left: 0 }, (settings.duration / settings.shakes) / 4);
+            }
+        });
+      };
+    }(jQuery));
 
 Template.vanillalists.helpers({
   fullName: function () {
@@ -92,11 +123,13 @@ Template.vanillalists.helpers({
 });
 Template.vanillalists.events({
   'click #createTheList': function (event, template) {
-    var listContent= template.find('.listText').value;
- 
+    var thisListTitle= template.find('.listText').value;
+    var thisListContent= "Get everything but the first line of .listText/above var.";
+
     Lists.insert({
       user_id: Meteor.user()._id,
-      list: listContent,
+      list: thisListTitle,
+      listContent: thisListContent,
       created_at: new Date()
     });
     template.find('.listText').value = "";
@@ -156,6 +189,7 @@ Template.vanillaitems.events({
     template.find('.itemText').value = "";
   }
 });
+
 var tryLogin = function (event, template){
   if (Meteor.userId()) {
     Meteor.logout();
@@ -164,7 +198,8 @@ var tryLogin = function (event, template){
       userPassword = template.find('#password').value;
     Meteor.loginWithPassword(userName, userPassword, function (error) {
       if (error) {
-        console.log(error);
+        template.find('#password').value = "";
+        jQuery('.login').shake();
       }
     });
   }
@@ -186,12 +221,16 @@ Template.login.events({
 });
 
 var trySignup = function (event, template){
-      var userEmail = template.find('#email').value,
-      userName  = template.find('#newusername').value,
-      password  = template.find('#newpassword').value,
-      password2 = template.find('#password2').value,
-      name      = template.find('#fullname').value;
- 
+    var userEmail = template.find('#email').value,
+    userName  = template.find('#newusername').value,
+    password  = template.find('#newpassword').value,
+    password2 = template.find('#password2').value,
+    name      = template.find('#fullname').value;
+    if(password == ""){
+        template.find('#newpassword').value = "";
+        template.find('#password2').value = "";
+        jQuery('.signup').shake();
+    };
     Accounts.createUser({
       username: userName,
       email:    userEmail,
@@ -201,7 +240,9 @@ var trySignup = function (event, template){
       }
     }, function (error) {
       if (error) {
-        console.log("Cannot create user");
+        template.find('#newpassword').value = "";
+        template.find('#password2').value = "";
+        jQuery('.signup').shake();
       }
     });
 }

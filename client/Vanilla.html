@@ -69,17 +69,18 @@
 
 <template name="vanillalists">
 	<header class="holo-actionBar"><span>Vanilla Writer</span><button style="float:right;" id="btnLogOut">Logout</button></header>
-	<p>Fullname: {{fullName}}</p>
+	<!--<p>Fullname: {{fullName}}</p>
 	<p>Username: {{userName}}</p>
 	<p>Number: {{noOfLists}}</p>
-	<p>Last: {{lastList}}</p>
+	<p>Last: {{lastList}}</p>-->
 	{{#each lists}}
 	<div class="listWrapper">
-		<hr/>
+		<!--<hr/>
 		<p>{{buddyFullName user_id}}</p>
 		<p>@{{buddyUserName user_id}}</p>
-		<p>{{elapsedTime list}}</p>
+		<p>{{elapsedTime list}}</p>-->
 		<p>{{list}}</p>
+		<span>{{listContent}}</span>
 		<input id="deleteList" type="submit" value="Delete List">
 	</div>
 	{{/each}}
