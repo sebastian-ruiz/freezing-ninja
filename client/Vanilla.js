@@ -123,12 +123,13 @@ Template.vanillalists.helpers({
 });
 Template.vanillalists.events({
   'click #createTheList': function (event, template) {
-    var thisListTitle= template.find('.listText').value;
-    var thisListContent= "Get everything but the first line of .listText/above var.";
+    var thisList= template.find('.listText').value;
+    var firstLine = thisList.split('\n')[0];
+    var thisListContent= thisList.split('\n')[1];
 
     Lists.insert({
       user_id: Meteor.user()._id,
-      list: thisListTitle,
+      list: firstLine,
       listContent: thisListContent,
       created_at: new Date()
     });
