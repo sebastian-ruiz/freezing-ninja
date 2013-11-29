@@ -1,21 +1,18 @@
 <head>
-	<title>Vanilla</title>
+	<title>Freezing Ninja</title>
 	<meta name="viewport" content="width=device-width">
 	<meta name="viewport" content="initial-scale=1">
 </head>
-<body>
-	
-  {{#if currentUser}}
-  	
-    {{> vanillalists}}
-    {{> vanillaitems}}
-  {{else}}
-  	<header class="holo-actionBar"><span>Vanilla Writer</span><button style="float:right;">About</button></header>
-    {{> homecontent}}
-  {{/if}}
-  <footer class="holo-actionBar"><button onclick="window.open('demo-dark.html', '_self');" style="width:100%;">Switch to dark theme</button></header>
-</body>
 
+<body>
+  {{#if currentUser}}
+        {{> vanillaPages }}
+  {{else}}
+  	<header class="holo-actionBar"><span>Freezing Ninja</span><button style="float:right;">About</button></header>
+    {{> homecontent}}
+
+  {{/if}}
+</body>
 <template name="homecontent">
 	<div class="loginWrapper">
 		{{> login}}
@@ -68,36 +65,95 @@
 		<input class="half-size" id="btnToggleSignup" type="submit" value="Or Log In">
 	</div>
 </template>
+<template name="vanillaPages">
+    <header class="holo-actionBar">
+        <div id="indicator">
+            <div id="dotty"></div>
+        </div>
+        <!--<span>Vanilla Writer</span><button style="float:right;" id="btnLogOut">Logout</button>-->
+    </header>
 
+
+    <div id="viewport" style="width: {{pageWidth}}px;">
+        <div id="pages-wrapper" style="height: {{pageHeight}}px;">
+            <div id="scroller" style="width: {{allPagesWidth}}px;">
+                <div class="page-wrapper" style="width: {{pageWidth}}px;">
+                    {{> vanillalists}}
+                </div>
+                <div class="page-wrapper" style="width: {{pageWidth}}px;">
+                    <p>some stuff here</p>
+                    {{> vanillaitems}}
+                </div>
+                <div class="page-wrapper" style="width: {{pageWidth}}px; height: {{pageHeight}}px;">
+                    <div id="list-wrapper">
+                        <div id="scroller" style="width: {{pageWidth}}px; height: {{listScrollerHeight}}px;">
+                            <ul>
+                                <li>Pretty row 1</li>
+                                <li>Pretty row 2</li>
+                                <li>Pretty row 3</li>
+                                <li>Pretty row 4</li>
+                                <li>Pretty row 5</li>
+                                <li>Pretty row 1</li>
+                                <li>Pretty row 2</li>
+                                <li>Pretty row 3</li>
+                                <li>Pretty row 4</li>
+                                <li>Pretty row 5</li>
+                                <li>Pretty row 1</li>
+                                <li>Pretty row 2</li>
+                                <li>Pretty row 3</li>
+                                <li>Pretty row 4</li>
+                                <li>Pretty row 5</li>
+                                <li>Pretty row 5</li>
+                                <li>Pretty row 1</li>
+                                <li>Pretty row 2</li>
+                                <li>Pretty row 3</li>
+                                <li>Pretty row 4</li>
+                                <li>Pretty row 5</li>
+                                <li>Pretty row 5</li>
+                                <li>Pretty row 1</li>
+                                <li>Pretty row 2</li>
+                                <li>Pretty row 3</li>
+                                <li>Pretty row 4</li>
+                                <li>Pretty row 5</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-wrapper" style="width: {{pageWidth}}px;">
+                    <p>some stuff here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="holo-actionBar"><button onclick="window.open('demo-dark.html', '_self');" style="width:100%;">Switch to dark theme</button></footer>
+</template>
 <template name="vanillalists">
-	<header class="holo-actionBar"><span>Vanilla Writer</span><button style="float:right;" id="btnLogOut">Logout</button></header>
-	<div id="wrapper">
-	<ul>
-		<li>List item</li>
-		<li>List item</li>
-		<li>List item</li>
-	</ul>
-</div>
-	<!--<p>Fullname: {{fullName}}</p>
-	<p>Username: {{userName}}</p>
-	<p>Number: {{noOfLists}}</p>
-	<p>Last: {{lastList}}</p>-->
-	{{#each lists}}
-	<div class="listWrapper">
-		<!--<hr/>
-		<p>{{buddyFullName user_id}}</p>
-		<p>@{{buddyUserName user_id}}</p>
-		<p>{{elapsedTime list}}</p>-->
-		<p>{{list}}</p>
-		<span>{{listContent}}</span>
-		<input id="deleteList" type="submit" value="Delete List">
-	</div>
-	{{/each}}
-	<h1>Create a new list</h1>
-	<p>
-	  <textarea name="text" class="listText"></textarea>
-	  <input id="createTheList" type="submit" value="List!">
-	</p>
+    <div id="vanillaLists" class="overthrow">
+        <!--<p>Fullname: {{fullName}}</p>
+       <p>Username: {{userName}}</p>
+       <p>Number: {{noOfLists}}</p>
+       <p>Last: {{lastList}}</p>-->
+        {{#each lists}}
+        <div class="listWrapper">
+            <!--<hr/>
+            <p>{{buddyFullName user_id}}</p>
+            <p>@{{buddyUserName user_id}}</p>
+            <p>{{elapsedTime list}}</p>-->
+            <p>{{list}}</p>
+            <span>{{listContent}}</span>
+            <input id="deleteList" type="submit" value="Delete List">
+        </div>
+        {{/each}}
+        <h1>Create a new list</h1>
+        <p>
+            <textarea name="text" class="listText"></textarea>
+            <input id="createTheList" type="submit" value="List!">
+        </p>
+    </div>
+
+
+
+
 </template>
 <template name="vanillaitems">
 	<p>Last: {{lastItem}}</p>
@@ -117,3 +173,4 @@
 	  <input id="createTheItem" type="submit" value="Item!">
 	</p>
 </template>
+

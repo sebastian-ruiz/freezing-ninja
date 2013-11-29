@@ -46,10 +46,37 @@ Deps.autorun(function () {
                     .animate({ left: 0 }, (settings.duration / settings.shakes) / 4);
             }
         });
-      };
-    }(jQuery));
+    };
+}(jQuery));
 
+
+Template.vanillaPages.helpers({
+    pageHeight: function(){
+        var documentHeight = $(window).height()-96;
+        //docuementHeight = 8;
+        return documentHeight;
+    },
+    listScrollerHeight: function(){
+        var documentHeight = $(window).height()-96;
+        return documentHeight;
+    },
+    pageWidth: function() {
+        var pageWidth = $(window).width()
+        return pageWidth;
+    },
+    numPages: function() {
+        var numPages = $("#scroller .page-wrapper").length
+        return numPages;
+    },
+    allPagesWidth: function() {
+        var documentWidth = $(window).width();
+        var numberOfPages = $("#scroller .page-wrapper").length;
+        var multiplied = documentWidth*numberOfPages
+        return multiplied;
+    }
+});
 Template.vanillalists.helpers({
+
   fullName: function () {
     return Meteor.user().profile.name;
   },
